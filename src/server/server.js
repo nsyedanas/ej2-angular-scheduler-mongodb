@@ -23,16 +23,15 @@ MongoClient.connect(url, function (err, db) {
             res.send(cus);
         });
     });
+    
     app.post("/BatchData", (req, res) => {
         console.log(req.body);
         var eventData = [];
         if (req.body.action == "insert" || (req.body.action == "batch" && req.body.added.length > 0)) {
             (req.body.action == "insert") ? eventData.push(req.body.value) : eventData = req.body.added;
             for (var i = 0; i < eventData.length; i++) {
-                var sdate = new Date(eventData[i].StartTime);
-                var edate = new Date(eventData[i].EndTime);
-                eventData[i].StartTime = (new Date(+sdate - (sdate.getTimezoneOffset() * 60000)));
-                eventData[i].EndTime = (new Date(+edate - (edate.getTimezoneOffset() * 60000)));
+                eventData[i].StartTime instanceof Date ? eventData[i].StartTime.toISOString() : eventData[i].StartTime,
+                eventData[i].EndTime instanceof Date ? eventData[i].EndTime.toISOString() : eventData[i].EndTime,
                 dbo.collection('ScheduleData').insertOne(eventData[i]);
             }
         }
@@ -40,10 +39,8 @@ MongoClient.connect(url, function (err, db) {
             (req.body.action == "update") ? eventData.push(req.body.value) : eventData = req.body.changed;
             for (var i = 0; i < eventData.length; i++) {
                 delete eventData[i]._id;
-                var sdate = new Date(eventData[i].StartTime);
-                var edate = new Date(eventData[i].EndTime);
-                eventData[i].StartTime = (new Date(+sdate - (sdate.getTimezoneOffset() * 60000)));
-                eventData[i].EndTime = (new Date(+edate - (edate.getTimezoneOffset() * 60000)));
+                eventData[i].StartTime instanceof Date ? eventData[i].StartTime.toISOString() : eventData[i].StartTime,
+                eventData[i].EndTime instanceof Date ? eventData[i].EndTime.toISOString() : eventData[i].EndTime,
                 dbo.collection('ScheduleData').updateOne({ "Id": eventData[i].Id }, { $set: eventData[i] });
             }
         }

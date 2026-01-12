@@ -18,6 +18,6 @@ export class AppComponent implements OnInit {
   public eventSettings: EventSettingsModel = { dataSource: this.dataManager };
   public selectedDate: Date;
   ngOnInit(): void {
-    this.selectedDate = new Date(2018, 1, 14);
+    this.selectedDate = new Date(2026, 0, 1);
   }
 }
