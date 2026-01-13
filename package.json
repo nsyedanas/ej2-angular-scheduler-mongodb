@@ -36,8 +36,9 @@
     "@syncfusion/ej2-navigations": "^32.1.19",
     "@syncfusion/ej2-popups": "^32.1.19",
     "@syncfusion/ej2-schedule": "^32.1.22",
+    "cors": "^2.8.5",
     "moment": "2.29.4",
-    "mongodb": "^3.2.3",
+    "mongodb": "^7.0.0",
     "rxjs": "7.8.0",
     "tslib": "2.3.0",
     "zone.js": "^0.14.3"
