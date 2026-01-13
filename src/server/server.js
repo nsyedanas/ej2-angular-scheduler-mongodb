@@ -30,8 +30,8 @@ MongoClient.connect(url, function (err, db) {
         if (req.body.action == "insert" || (req.body.action == "batch" && req.body.added.length > 0)) {
             (req.body.action == "insert") ? eventData.push(req.body.value) : eventData = req.body.added;
             for (var i = 0; i < eventData.length; i++) {
-                eventData[i].StartTime instanceof Date ? eventData[i].StartTime.toISOString() : eventData[i].StartTime,
-                eventData[i].EndTime instanceof Date ? eventData[i].EndTime.toISOString() : eventData[i].EndTime,
+                eventData[i].StartTime = new Date(eventData[i].StartTime);
+                eventData[i].EndTime = new Date(eventData[i].EndTime);
                 dbo.collection('ScheduleData').insertOne(eventData[i]);
             }
         }
@@ -39,8 +39,8 @@ MongoClient.connect(url, function (err, db) {
             (req.body.action == "update") ? eventData.push(req.body.value) : eventData = req.body.changed;
             for (var i = 0; i < eventData.length; i++) {
                 delete eventData[i]._id;
-                eventData[i].StartTime instanceof Date ? eventData[i].StartTime.toISOString() : eventData[i].StartTime,
-                eventData[i].EndTime instanceof Date ? eventData[i].EndTime.toISOString() : eventData[i].EndTime,
+                eventData[i].StartTime = new Date(eventData[i].StartTime);
+                eventData[i].EndTime = new Date(eventData[i].EndTime);
                 dbo.collection('ScheduleData').updateOne({ "Id": eventData[i].Id }, { $set: eventData[i] });
             }
         }
