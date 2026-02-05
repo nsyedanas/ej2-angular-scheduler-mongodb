@@ -42,7 +42,7 @@ The backend provides REST API endpoints for managing calendar events, which are 
 
 ## Output Preview
 **Syncfusion Angular Scheduler**
-![FrontEnd Angular](./SampleOutputs/FrontEnd-Angular.png)
+![FrontEnd - Angular Scheduler](./scheduler-output.png)
 *Image illustrating the Syncfusion Angular Scheduler* 
 
 ## Troubleshooting
